@@ -95,8 +95,8 @@ const App = () => {
 
   if (!isGameStarted) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-gray-300 to-blue-600">
-        <h1 className="text-3xl font-bold mb-4">Quizspelet!</h1>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-blue-300 to-blue-600">
+        <h1 className="text-3xl font-bold mb-4">Quizspelet! 𝞹📈🧠📚</h1>
         <button
           onClick={handleStartGame}
           className="mt-4 py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600"
@@ -114,10 +114,11 @@ const App = () => {
   if (isGameOver) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-gray-300 to-blue-600">
-        <h1 className="text-3xl font-bold mb-4">Quizspelet</h1>
-        <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full text-center">
-          <h2 className="text-xl font-semibold mb-4">Spelet är slut!</h2>
-          <p className="text-lg font-medium mb-4">Du fick {correctAnswers} av {questions.length} rätt!</p>
+          <h1 className="text-3xl font-bold mb-4">Quizspelet! 𝞹📈🧠📚</h1>
+          <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full text-center">
+          <h1 className="text-3xl font-bold mb-4">Grattis!</h1>
+          <h2 className="text-xl font-semibold mb-4">Quizspelet är slut!</h2>
+          <p className="text-lg font-medium mb-4">Du fick {correctAnswers} av {questions.length} rätt!🥳</p>
           <button
             onClick={handleRestartGame}
             className="mt-4 py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600"
@@ -133,8 +134,7 @@ const App = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-600 via-gray-300 to-blue-600">
-      <h1 className="text-3xl font-bold mb-4">Quizspelet</h1>
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full">
+            <div className="bg-white shadow-md rounded-lg p-6 max-w-lg w-full">
         <p className="text-gray-700 text-sm mb-2">Tid kvar: {timeLeft} sekunder</p>
         <h2 className="text-xl font-semibold mb-4">{currentQuestion.question}</h2>
         <div className="grid grid-cols-2 gap-4">

@@ -1,26 +1,26 @@
 [
     {
-      "question": "What is the capital of France?",
-      "options": ["Paris", "Berlin", "Madrid", "Rome"],
+      "question": "Vad är huvudstaden i Frankrike?",
+      "options": ["Paris", "Berlin", "Madrid", "Rom"],
       "answer": "Paris"
     },
     {
-      "question": "What is 2 + 2?",
+      "question": "Vad är 2 + 2?",
       "options": ["3", "4", "5", "6"],
       "answer": "4"
     },
     {
-      "question": "What is the largest planet in our solar system?",
-      "options": ["Earth", "Jupiter", "Mars", "Saturn"],
+      "question": "Vilken är den största planeten i vårt solsystem?",
+      "options": ["Jorden", "Jupiter", "Mars", "Saturnus"],
       "answer": "Jupiter"
     },
     {
-        "question": "What is the capital of India?",
+        "question": "Vad är huvudstaden i Indien?",
         "options": ["Delhi", "Mumbai", "Kolkata", "Chennai"],
         "answer": "Delhi"
     },
     {
-        "question": "What is the tallest mountain in the world?",
+        "question": "Vad är det högsta berget i världen?",
         "options": ["Mount Everest", "K2", "Kangchenjunga", "Lhotse"],
         "answer": "Mount Everest"
     }
