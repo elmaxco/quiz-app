@@ -1,56 +1,36 @@
-import React, { useState, useEffect } from "react"; 
-// Importerar React och hookarna useState och useEffect. Dessa används för att hantera state och sidverkan i komponenten.
+import React, { useState, useEffect } from "react"; // Importerar React och hookarna useState och useEffect. Dessa används för att hantera state och sidverkan i komponenten.
 
-const App = () => {
-  // Huvudkomponenten för ditt quizspel.
 
-  const [questions, setQuestions] = useState([]); 
-  // State för att lagra quizfrågorna.
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); 
-  // Håller reda på vilken fråga som visas för tillfället.
-
-  const [selectedAnswer, setSelectedAnswer] = useState(null); 
-  // Håller reda på användarens valda svar.
-
-  const [feedback, setFeedback] = useState(""); 
-  // Ger feedback till användaren, t.ex. "Rätt svar!" eller "Fel svar!".
-
-  const [timeLeft, setTimeLeft] = useState(10); 
-  // Timer för varje fråga.
-
-  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false); 
-  // Visar om det rätta svaret ska visas.
-
-  const [timerId, setTimerId] = useState(null); 
-  // Sparar ID för timer för att kunna rensa den vid behov.
-
-  const [isGameOver, setIsGameOver] = useState(false); 
-  // Håller reda på om spelet är slut.
-
-  const [correctAnswers, setCorrectAnswers] = useState(0); 
-  // Håller koll på antalet rätta svar.
-
-  const [isGameStarted, setIsGameStarted] = useState(false); 
-  // Håller reda på om spelet har startat.
+const App = () => {// Huvudkomponenten för quizspelet.
+    const [questions, setQuestions] = useState([]); // State för att lagra quizfrågorna.
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Håller reda på vilken fråga som visas för tillfället.
+    const [selectedAnswer, setSelectedAnswer] = useState(null); // Håller reda på användarens valda svar.
+    const [feedback, setFeedback] = useState(""); // Ger feedback till användaren, t.ex. "Rätt svar!" eller "Fel svar!".
+    const [timeLeft, setTimeLeft] = useState(10); // Timer för varje fråga.
+    const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);  // Visar om det rätta svaret ska visas.
+    const [timerId, setTimerId] = useState(null); // Sparar ID för timer för att kunna rensa den vid behov.
+    const [isGameOver, setIsGameOver] = useState(false); // Håller reda på om spelet är slut.
+    const [correctAnswers, setCorrectAnswers] = useState(0); // Håller koll på antalet rätta svar.
+    const [isGameStarted, setIsGameStarted] = useState(false); // Håller reda på om spelet har startat.
+  
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch("./questions.json");
-        // Hämtar frågor från en JSON-fil.
+        const response = await fetch("./questions.json");// Hämtar frågor från en JSON-fil.
+        
 
         if (!response.ok) {
           throw new Error("Failed to load questions.");
         }
 
         const data = await response.json();
-        setQuestions(data); 
-        // Sparar de hämtade frågorna i state.
+        setQuestions(data); // Sparar de hämtade frågorna i state.
+        
       } catch (error) {
         console.error("Error fetching questions:", error); 
-        // Loggar ett eventuellt fel.
-      }
+        
+      }// Loggar ett eventuellt fel.
     };
 
     fetchQuestions(); 
@@ -63,73 +43,55 @@ const App = () => {
     }
 
     if (timeLeft === 0) {
-      handleTimeout(); 
-      // Om tiden är slut, hantera timeout-logik.
+      handleTimeout(); // Om tiden är slut, hantera timeout-logik.
+      
       return;
     }
 
     const timer = setTimeout(() => {
-      setTimeLeft((prev) => prev - 1); 
-      // Minskar timern varje sekund.
-    }, 1000);
+      setTimeLeft((prev) => prev - 1);      
+    }, 1000); // Minskar timern varje sekund.
 
-    setTimerId(timer); 
-    // Sparar timer-ID:t.
-
-    return () => clearTimeout(timer); 
-    // Rensar timern vid uppdateringar eller när komponenten förstörs.
-  }, [timeLeft, isGameStarted]); 
-  // Reagerar på ändringar av timeLeft och isGameStarted.
+    setTimerId(timer); // Sparar timer-ID:t.
+    
+    return () => clearTimeout(timer); // Rensar timern vid uppdateringar eller när komponenten förstörs.    
+  }, [timeLeft, isGameStarted]); // Reagerar på ändringar av timeLeft och isGameStarted.
+  
 
   const handleAnswerSelection = (answer) => {
-    setSelectedAnswer(answer); 
-    // Sätter användarens valda svar.
+    setSelectedAnswer(answer);  // Sätter användarens valda svar.
+   
 
-    clearTimeout(timerId); 
-    // Stoppar timern när ett svar väljs.
+    clearTimeout(timerId); // Stoppar timern när ett svar väljs.
 
+    
     if (answer === questions[currentQuestionIndex].answer) {
-      setFeedback("Rätt svar!"); 
-      // Om svaret är rätt, ge positiv feedback.
-      setCorrectAnswers((prev) => prev + 1); 
-      // Öka antalet rätta svar.
+      setFeedback("Rätt svar!");  // Om svaret är rätt, ge positiv feedback.     
+      setCorrectAnswers((prev) => prev + 1); // Öka antalet rätta svar.      
     } else {
-      setFeedback("Fel svar!"); 
-      // Annars ge negativ feedback.
+      setFeedback("Fel svar!"); // Annars ge negativ feedback.            
     }
 
-    setShowCorrectAnswer(true); 
-    // Visa det korrekta svaret.
+    setShowCorrectAnswer(true); // Visa det korrekta svaret.    
   };
 
   const handleNextQuestion = () => {
-    setFeedback(""); 
-    // Återställ feedback.
-
-    setSelectedAnswer(null); 
-    // Rensa användarens val.
-
-    setShowCorrectAnswer(false); 
-    // Dölj rätt svar.
-
-    setTimeLeft(10); 
-    // Återställ tid för nästa fråga.
+    setFeedback(""); // Återställ feedback.
+    setSelectedAnswer(null);// Rensa användarens val.    
+    setShowCorrectAnswer(false); // Dölj rätt svar.
+    setTimeLeft(10); // Återställ tid för nästa fråga.
+    
 
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1); 
-      // Gå till nästa fråga om det finns fler.
+      setCurrentQuestionIndex((prev) => prev + 1);// Gå till nästa fråga om det finns fler.       
     } else {
-      setIsGameOver(true); 
-      // Om det inte finns fler frågor, avsluta spelet.
+      setIsGameOver(true); // Om det inte finns fler frågor, avsluta spelet.      
     }
   };
 
   const handleTimeout = () => {
-    setFeedback("Tiden är slut!"); 
-    // Ge timeout-feedback.
-
-    setShowCorrectAnswer(true); 
-    // Visa rätt svar när tiden tar slut.
+    setFeedback("Tiden är slut!");// Ge timeout-feedback. 
+    setShowCorrectAnswer(true);// Visa rätt svar när tiden tar slut.         
   };
 
   const handleRestartGame = () => {
@@ -145,11 +107,10 @@ const App = () => {
   };
 
   const handleStartGame = () => {
-    setIsGameStarted(true); 
-    // Starta spelet.
+    setIsGameStarted(true); // Starta spelet.
+    
 
-    setTimeLeft(10); 
-    // Återställ timern.
+    setTimeLeft(10);// Återställ timern.     
   };
 
   if (!isGameStarted) {
@@ -168,8 +129,7 @@ const App = () => {
   }
 
   if (questions.length === 0) {
-    return <div className="text-center mt-10">Laddar frågor...</div>;
-    // Visar en laddningsskärm tills frågorna är hämtade.
+    return <div className="text-center mt-10">Laddar frågor...</div>;// Visar en laddningsskärm tills frågorna är hämtade.    
   }
 
   if (isGameOver) {
@@ -243,6 +203,5 @@ const App = () => {
   );
   // Huvudlayouten för varje fråga.
 };
-
 export default App;
-// Exporterar komponenten för användning i din applikation.
+
