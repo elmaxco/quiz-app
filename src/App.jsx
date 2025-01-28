@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Importerar React och hookarna useState och useEffect. Dessa används för att hantera state och sidverkan i komponenten.
+import React, { useState, useEffect } from "react"; 
 
 
 const App = () => {// Huvudkomponenten för quizspelet.
@@ -28,8 +28,7 @@ const App = () => {// Huvudkomponenten för quizspelet.
         setQuestions(data); // Sparar de hämtade frågorna i state.
         
       } catch (error) {
-        console.error("Error fetching questions:", error); 
-        
+        console.error("Error fetching questions:", error);         
       }// Loggar ett eventuellt fel.
     };
 
